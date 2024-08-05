@@ -1,0 +1,7 @@
+# Folder
+.venv/
+.idea/
+__pycache__/
+
+# Files
+test.py
