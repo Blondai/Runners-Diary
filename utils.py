@@ -1,3 +1,4 @@
+from constants import _get_digits
 
 
 def string_to_int(list_of_strings: list[str]) -> list[int]:
@@ -82,3 +83,27 @@ def none_string(string: str | None) -> str:
     if string is None:
         return ''
     return string
+
+
+def to_string(value: int | float | str | None) -> str:
+    """
+    Convert a value to its string representation.
+
+    Args:
+        value (int | float | str | None): The value to convert.
+
+    Returns:
+        str: The string representation of the value. Returns '-' if the value is None.
+    """
+    if value is None:
+        return '-'
+    elif isinstance(value, int):
+        return f'{value}'
+    elif isinstance(value, float):
+        return f'{round(value, _get_digits())}'
+    elif isinstance(value, str):
+        return f'{value}'
+    try:
+        return value.to_string()
+    except:
+        raise TypeError(f"Type '{type(value)}' is not supported in to_string function.")

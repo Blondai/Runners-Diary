@@ -1,5 +1,5 @@
 from distance import Distance
-from time import Time
+from duration import Duration
 from utils import _round
 
 
@@ -9,18 +9,18 @@ class Speed:
 
     Attributes:
         distance (Distance): The distance traveled.
-        duration (Time): The time duration of the travel.
+        duration (Duration): The time duration of the travel.
     """
-    def __init__(self, distance: Distance, duration: Time) -> None:
+    def __init__(self, distance: Distance, duration: Duration) -> None:
         """
         Initialize the Speed object with distance and duration.
 
         Args:
             distance (Distance): The distance traveled.
-            duration (Time): The time duration of the travel.
+            duration (Duration): The time duration of the travel.
         """
         self.distance: Distance = distance
-        self.duration: Time = duration
+        self.duration: Duration = duration
 
     def to_kmh(self, num_of_digits: int | None = None) -> float:
         """
@@ -60,3 +60,7 @@ class Speed:
         """
         speed_mph: float = self.distance.to_miles() / self.duration.to_hours()
         return _round(speed_mph, num_of_digits)
+
+    # TODO: Add Pace Method
+    def to_pace(self):
+        pass

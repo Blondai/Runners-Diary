@@ -1,7 +1,7 @@
 from utils import string_to_int, _round, is_between
 
 
-class Time:
+class Duration:
     """
     A class to represent a time duration in hours, minutes, and seconds.
 
@@ -12,7 +12,7 @@ class Time:
     """
     def __init__(self, hours: int, minutes: int, seconds: int) -> None:
         """
-        Initialize the Time object with hours, minutes, and seconds.
+        Initialize the Duration object with hours, minutes, and seconds.
 
         Args:
             hours (int): The hours component of the time.
@@ -40,7 +40,7 @@ class Time:
     @staticmethod
     def from_string(string: str) -> tuple[int, int, int]:
         """
-        Create a Time object from a string representation.
+        Create a Duration object from a string representation.
 
         Args:
             string (str): The string representation of the time, formatted as 'hh:mm:ss' or 'mm:ss'.
@@ -67,7 +67,7 @@ class Time:
 
     def to_seconds(self, number_of_digits: int | None = None) -> int:
         """
-        Convert the time to total seconds.
+        Convert the duration to total seconds.
 
         Args:
             number_of_digits (int | None, optional): Number of decimal digits to round to. Defaults to None.
@@ -83,7 +83,7 @@ class Time:
 
     def to_minutes(self, number_of_digits: int | None = None) -> float:
         """
-        Convert the time to total minutes.
+        Convert the duration to total minutes.
 
         Args:
             number_of_digits (int | None, optional): Number of decimal digits to round to. Defaults to None.
@@ -99,7 +99,7 @@ class Time:
 
     def to_hours(self, number_of_digits: int | None = None) -> float:
         """
-        Convert the time to total hours.
+        Convert the duration to total hours.
 
         Args:
             number_of_digits (int | None, optional): Number of decimal digits to round to. Defaults to None.
@@ -115,7 +115,7 @@ class Time:
 
     def __str__(self) -> str:
         """
-        Return the string representation of the time in 'hh:mm:ss' format.
+        Return the string representation of the duration in 'hh:mm:ss' format.
 
         Returns:
             str: The string representation of the time.
