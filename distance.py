@@ -1,26 +1,103 @@
-from utils import _round
+from utils import _round, is_between
 
 
 class Distance:
-    def __init__(self, string: str) -> None:
-        self.distance_meter: int = int(string)
+    """
+    A class to represent distance in meters and convert it to other units.
 
-    def to_meter(self, num_of_digits: int | None = None) -> int:
-        meter: int = self.distance_meter
-        return _round(meter, num_of_digits)
+    Attributes:
+        distance_meters (int): Distance in meters.
+    """
+    def __init__(self, distance_meters: int) -> None:
+        """
+        Initialize the Distance object with meters.
 
-    def to_kilometer(self, num_of_digits: int | None = None) -> float:
-        kilometer: float = self.distance_meter * 1000
-        return _round(kilometer, num_of_digits)
+        Args:
+            distance_meters (int): The distance in meters.
 
-    def to_megameter(self, num_of_digits: int | None = None) -> float:
-        megameter: float = self.distance_meter / (1000 * 1000)
-        return _round(megameter, num_of_digits)
+        Raises:
+            ValueError: If the provided value is out of the valid range or not an integer.
+        """
+        is_between(distance_meters,
+                   lower_value=0,
+                   int_only=True)
+        self.distance_meters: int = distance_meters
+
+    @staticmethod
+    def from_string(string: str):
+        """
+        Create a Distance object from a string representation.
+
+        Args:
+            string (str): The string representation of the distance in meters.
+
+        Returns:
+            int: The distance in meters.
+        """
+        distance_meter: int = int(string)
+        return distance_meter
+
+    def to_meters(self, num_of_digits: int | None = None) -> int:
+        """
+        Convert the distance to meters.
+
+        Args:
+            num_of_digits (int | None, optional): Number of decimal digits to round to. Defaults to None.
+
+        Returns:
+            int: The distance in meters.
+        """
+        meters: int = self.distance_meters
+        return _round(meters, num_of_digits)
+
+    def to_kilometers(self, num_of_digits: int | None = None) -> float:
+        """
+        Convert the distance to kilometers.
+
+        Args:
+            num_of_digits (int | None, optional): Number of decimal digits to round to. Defaults to None.
+
+        Returns:
+            float: The distance in kilometers.
+        """
+        kilometers: float = self.distance_meters / 1000
+        return _round(kilometers, num_of_digits)
+
+    def to_megameters(self, num_of_digits: int | None = None) -> float:
+        """
+        Convert the distance to megameters.
+
+        Args:
+            num_of_digits (int | None, optional): Number of decimal digits to round to. Defaults to None.
+
+        Returns:
+            float: The distance in megameters.
+        """
+        megameters: float = self.distance_meters / (1000 * 1000)
+        return _round(megameters, num_of_digits)
 
     def to_miles(self, num_of_digits: int | None = None) -> float:
-        miles: float = self.distance_meter * (1000 * 1.609344)
+        """
+        Convert the distance to miles.
+
+        Args:
+            num_of_digits (int | None, optional): Number of decimal digits to round to. Defaults to None.
+
+        Returns:
+            float: The distance in miles.
+        """
+        miles: float = self.distance_meters * (1000 * 1.609344)
         return _round(miles, num_of_digits)
 
     def to_feet(self, num_of_digits: int | None = None) -> float:
-        feet: float = self.distance_meter * (1 / 0.3048)
+        """
+        Convert the distance to feet.
+
+        Args:
+            num_of_digits (int | None, optional): Number of decimal digits to round to. Defaults to None.
+
+        Returns:
+            float: The distance in feet.
+        """
+        feet: float = self.distance_meters * (1 / 0.3048)
         return _round(feet, num_of_digits)
