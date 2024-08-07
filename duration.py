@@ -10,6 +10,7 @@ class Duration:
         minutes (int): Minutes part of the time.
         seconds (int): Seconds part of the time.
     """
+
     def __init__(self, hours: int, minutes: int, seconds: int) -> None:
         """
         Initialize the Duration object with hours, minutes, and seconds.
@@ -65,6 +66,54 @@ class Duration:
             raise ValueError("Incorrect format. Use 'hh:mm:ss' or 'mm:ss'.")
         return hours, minutes, seconds
 
+    @staticmethod
+    def from_seconds(seconds: int) -> tuple[int, int, int]:
+        """
+        Create a Time object from a number of seconds.
+
+        Args:
+            seconds (int): The number of seconds.
+
+        Returns:
+            tuple[int, int, int]: The hours, minutes, and seconds.
+        """
+        hours: int = seconds // 3600
+        minutes: int = (seconds % 3600) // 60
+        seconds: int = seconds % 60
+        return hours, minutes, seconds
+
+    @staticmethod
+    def from_minutes(minutes: float) -> tuple[int, int, int]:
+        """
+        Create a Duration object from a number of minutes.
+
+        Args:
+            minutes (int): The number of minutes.
+
+        Returns:
+            tuple[int, int, int]: The hours, minutes, and seconds.
+        """
+        hours: int = int(minutes // 60)
+        seconds = int((minutes % 1) * 60)
+        minutes = int(minutes % 60)
+        return hours, minutes, seconds
+
+    @staticmethod
+    def from_hours(hours: float) -> tuple[int, int, int]:
+        """
+        Create a Duration object from a number of hours.
+
+        Args:
+            hours (float): The number of hours.
+
+        Returns:
+            tuple[int, int, int]: The hours, minutes, and seconds.
+        """
+        minutes = int((hours - int(hours)) * 60)
+        seconds = int((hours * 3600) % 60)
+        hours = int(hours)
+        return hours, minutes, seconds
+
     def to_seconds(self, number_of_digits: int | None = None) -> int:
         """
         Convert the duration to total seconds.
@@ -113,24 +162,30 @@ class Duration:
         time_in_hours += self.seconds / 3600
         return _round(time_in_hours, number_of_digits)
 
-    def __str__(self) -> str:
+    def __str__(self, short: bool = False) -> str:
         """
-        Return the string representation of the duration in 'hh:mm:ss' format.
+        Return the string representation of the duration in 'hh:mm:ss' or 'mm:ss' format.
+
+        Args:
+            short (bool, optional): If True, omit hours if they are zero. Defaults to False.
 
         Returns:
             str: The string representation of the time.
         """
-        string: str = ''
         if self.hours < 10:
-            string += f'0{self.hours}:'
+            hours_str: str = f'0{self.hours}'
         else:
-            string += f'{self.hours}:'
+            hours_str: str = f'{self.hours}'
         if self.minutes < 10:
-            string += f'0{self.minutes}:'
+            minutes_str: str = f'0{self.minutes}'
         else:
-            string += f'{self.minutes}:'
+            minutes_str: str = f'{self.minutes}'
         if self.seconds < 10:
-            string += f'0{self.seconds}'
+            seconds_str: str = f'0{self.seconds}'
         else:
-            string += f'{self.seconds}'
+            seconds_str: str = f'{self.seconds}'
+        if short and hours_str == '00':
+            string: str = minutes_str + ':' + seconds_str
+        else:
+            string: str = hours_str + ':' + minutes_str + ':' + seconds_str
         return string

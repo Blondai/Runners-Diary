@@ -61,6 +61,13 @@ class Speed:
         speed_mph: float = self.distance.to_miles() / self.duration.to_hours()
         return _round(speed_mph, num_of_digits)
 
-    # TODO: Add Pace Method
-    def to_pace(self):
-        pass
+    def to_pace(self) -> Duration:
+        """
+        Calculate the pace (minutes and seconds per kilometer).
+
+        Returns:
+            Duration: The pace as a Duration object.
+        """
+        pace_duration: tuple[int, int, int] = Duration.from_minutes(self.duration.to_minutes() / self.distance.to_kilometers())
+        pace: Duration = Duration(*pace_duration)
+        return pace

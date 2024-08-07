@@ -4,7 +4,6 @@
 **TODO:**
 - Add run_number to Run class
 - Add run_number to file_name?
-- Add Pace to Speed
 - Add docstrings to Run class
 - Add docstrings to other functions
 - Finish Run class
