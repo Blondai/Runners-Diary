@@ -1,3 +1,5 @@
+import os
+
 from constants import _get_digits
 
 
@@ -107,3 +109,55 @@ def to_string(value: int | float | str | None) -> str:
         return value.to_string()
     except:
         raise TypeError(f"Type '{type(value)}' is not supported in to_string function.")
+
+
+def str_is_int(character: str) -> None:
+    """
+    Check if a given character is a single digit and raise a TypeError if it is not.
+
+    Args:
+        character (str): A single character string to check.
+
+    Raises:
+        TypeError: If the length of the string is not 1.
+        TypeError: If the character is not a digit.
+    """
+    if len(character) != 1:
+        raise TypeError(f"Length of string needs to be exactly 1 '{character}' has {len(character)} characters.")
+    integers: set[str] = set([f'{i}' for i in range(10)])
+    if not character in integers:
+        raise TypeError(f"Character '{character}' is not an integer.")
+
+
+def str_correct_len(string: str, length: int) -> None:
+    """
+    Ensure that the given string has the specified length.
+
+    Args:
+        string (str): The string to check.
+        length (int): The required length of the string.
+
+    Raises:
+        TypeError: If the length of the string does not match the specified length.
+    """
+    if len(string) != length:
+        raise TypeError(f"String '{string}' has length {len(string)} but needs to be {length} characters long.")
+
+
+def get_directory(run: 'Run') -> str:
+    """
+    Generate the directory path for storing run files based on the run's date.
+
+    Args:
+        run (Run): An instance of the Run class, which contains a date attribute.
+
+    Returns:
+        str: The directory path in the format './LaTeX/yyyy.mm.dd Run/'.
+    """
+    string: str = f'./LaTeX/{run.date.__str__(reversed=True, short=True)} Run/'
+    return string
+
+
+def file_exists(file_location: str) -> None:
+    if os.path.exists(file_location):
+        input("There already is a file. Please backup the following file or it will be deleted:\n" + file_location)

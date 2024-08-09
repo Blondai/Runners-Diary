@@ -1,17 +1,14 @@
-**GOALS:**
-
+**GOALS:**\
+This project aims to provide a comprehensive system for tracking and analyzing running activities.
+It will feature classes for recording detailed run data, including distance, duration, energy expenditure, and more.
+There will be utilities for handling conversions into different units.
+Runs will be exported to pdf files for easy readability.
+They will also be exported to a json file, so you can later analyze multiple runs and visualize changes.
 
 **TODO:**
-- Add run_number to Run class
-- Add run_number to file_name?
-- Add docstrings to Run class
-- Add docstrings to other functions
-- Finish Run class
-- Add \_\_dict\_\_ Method to Run class
-- Possibly also Duration, Date, Distance, Energy, Speed
-- Add overwrite protection to _safe_to_file function
-- Add input from file method
-- Add _is_correct_format to all classes to help with new input
+- Add input_run function to import a new run
 - Add input function for every attribute
 - Add functions to import all runs
 - Add function for visualization
+- Add function to combine all pdf into one diary
+- Sort methods in classes

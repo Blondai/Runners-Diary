@@ -1,4 +1,4 @@
-from utils import _round, is_between
+from utils import _round, is_between, str_is_int
 
 
 class Distance:
@@ -8,6 +8,7 @@ class Distance:
     Attributes:
         distance_meters (int): Distance in meters.
     """
+
     def __init__(self, distance_meters: int) -> None:
         """
         Initialize the Distance object with meters.
@@ -23,19 +24,45 @@ class Distance:
                    int_only=True)
         self.distance_meters: int = distance_meters
 
-    @staticmethod
-    def from_string(string: str):
+    def __str__(self) -> str:
         """
-        Create a Distance object from a string representation.
-
-        Args:
-            string (str): The string representation of the distance in meters.
+        Return a string representation of the Distance object.
 
         Returns:
-            int: The distance in meters.
+            str: The string representation of the distance.
         """
+        string: str = f'{self.distance_meters}'
+        return string
+
+    @staticmethod
+    def from_string(string: str) -> 'Distance':
+        """
+        Create a Distance object from a string representing the distance in meters.
+
+        Args:
+            string (str): The distance string to convert, containing only digits.
+
+        Returns:
+            Distance: A Distance object created from the given string.
+        """
+        Distance.ensure_format(string)
         distance_meter: int = int(string)
-        return distance_meter
+        distance: Distance = Distance(distance_meter)
+        return distance
+
+    @staticmethod
+    def ensure_format(string: str) -> None:
+        """
+        Ensure that the distance string contains only digit characters.
+
+        Args:
+            string (str): The string to validate.
+
+        Raises:
+            TypeError: If the string contains non-digit characters.
+        """
+        for character in string:
+            str_is_int(character)
 
     def to_meters(self, num_of_digits: int | None = None) -> int:
         """

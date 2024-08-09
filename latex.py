@@ -2,7 +2,7 @@ import os
 import subprocess
 
 from run import Run
-from utils import to_string
+from utils import to_string, get_directory
 
 
 def _get_preamble() -> str:
@@ -78,11 +78,11 @@ def _get_table_1(run: Run) -> str:
                      r" \,\unit{\second}$\\"
                      "\n"
                      r"Speed & $"
-                     f"{to_string(run.speed.to_kmh())}"
+                     f"{to_string(run.speed().to_kmh())}"
                      r" \,\unit{\kilo\meter\per\hour}$\\"
                      "\n"
                      r"Pace & $"
-                     f"{to_string(run.speed.to_pace().__str__(short=True))}"
+                     f"{to_string(run.speed().to_pace().__str__(short=True))}"
                      r" \,\unit{\minute\per\kilo\meter}$\\"
                      "\n")
     return string_1
@@ -119,7 +119,7 @@ def _get_table_2(run: Run) -> str:
                      r" \,\unit{\meter}$\\"
                      "\n"
                      r"Steps & $"
-                     f"{to_string(run.total_steps)}"
+                     f"{to_string(run.total_steps())}"
                      r"$\\"
                      "\n")
     return string_2
@@ -238,7 +238,6 @@ def _get_text(run: Run) -> str:
     return text
 
 
-# TODO: Add overwrite protection
 def _new_folder(folder: str) -> None:
     """
     Create a new folder if it does not exist.
@@ -248,6 +247,8 @@ def _new_folder(folder: str) -> None:
     """
     if not os.path.exists(folder):
         os.makedirs(folder)
+    else:
+        input("Folder already exists. Backup any important files. Press enter to continue.")
 
 
 def _make_pdf(folder: str, file_location: str) -> None:
@@ -269,12 +270,10 @@ def safe_to_file(run: Run) -> None:
     Args:
         run (Run): The run instance.
     """
-    folder = f'./LaTeX/{run.date.__str__(reversed=True, short=True)} Run'
-    file_location: str = (f'./LaTeX/'
-                          f'{run.date.__str__(reversed=True, short=True)} Run/'
-                          f'{run.date.__str__(reversed=True, short=True)} Run.tex')
-    _new_folder(folder)
+    directory: str = get_directory(run)
+    file_location: str = directory + f'{run.date.__str__(reversed=True, short=True)} Run.tex'
+    _new_folder(directory)
     text: str = _get_text(run)
     with open(file_location, 'w') as file:
         file.write(text)
-    _make_pdf(folder, file_location)
+    _make_pdf(directory, file_location)

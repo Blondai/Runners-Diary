@@ -11,6 +11,7 @@ class Speed:
         distance (Distance): The distance traveled.
         duration (Duration): The time duration of the travel.
     """
+
     def __init__(self, distance: Distance, duration: Duration) -> None:
         """
         Initialize the Speed object with distance and duration.
@@ -68,6 +69,5 @@ class Speed:
         Returns:
             Duration: The pace as a Duration object.
         """
-        pace_duration: tuple[int, int, int] = Duration.from_minutes(self.duration.to_minutes() / self.distance.to_kilometers())
-        pace: Duration = Duration(*pace_duration)
+        pace: Duration = Duration.from_minutes(self.duration.to_minutes() / self.distance.to_kilometers())
         return pace
