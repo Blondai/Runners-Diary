@@ -1,4 +1,4 @@
-from utils import _round, is_between, str_is_int
+from utils import _round, is_between
 
 
 class Distance:
@@ -9,7 +9,7 @@ class Distance:
         distance_meters (int): Distance in meters.
     """
 
-    def __init__(self, distance_meters: int) -> None:
+    def __init__(self, distance_meters: int | None) -> None:
         """
         Initialize the Distance object with meters.
 
@@ -22,7 +22,7 @@ class Distance:
         is_between(distance_meters,
                    lower_value=0,
                    int_only=True)
-        self.distance_meters: int = distance_meters
+        self.distance_meters: int | None = distance_meters
 
     def __str__(self) -> str:
         """
@@ -31,8 +31,10 @@ class Distance:
         Returns:
             str: The string representation of the distance.
         """
-        string: str = f'{self.distance_meters}'
-        return string
+        if not self.distance_meters is None:
+            string: str = f'{self.distance_meters}'
+            return string
+        return '-'
 
     @staticmethod
     def from_string(string: str) -> 'Distance':
@@ -45,24 +47,12 @@ class Distance:
         Returns:
             Distance: A Distance object created from the given string.
         """
-        Distance.ensure_format(string)
-        distance_meter: int = int(string)
+        if string == '' or string == '-':
+            distance_meter: None = None
+        else:
+            distance_meter: int = int(string)
         distance: Distance = Distance(distance_meter)
         return distance
-
-    @staticmethod
-    def ensure_format(string: str) -> None:
-        """
-        Ensure that the distance string contains only digit characters.
-
-        Args:
-            string (str): The string to validate.
-
-        Raises:
-            TypeError: If the string contains non-digit characters.
-        """
-        for character in string:
-            str_is_int(character)
 
     def to_meters(self, num_of_digits: int | None = None) -> int:
         """

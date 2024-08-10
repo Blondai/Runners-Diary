@@ -1,8 +1,7 @@
-import os
 import subprocess
 
 from run import Run
-from utils import to_string, get_directory
+from utils import to_string, get_directory, _new_folder
 
 
 def _get_preamble() -> str:
@@ -99,11 +98,11 @@ def _get_table_2(run: Run) -> str:
         str: The second part of the table of the LaTeX document as a string.
     """
     string_2: str = (r"Heartbeat & $"
-                     f"{to_string(run.avg_heartbeats_per_minute)}"
+                     f"{to_string(run.avg_heartbeats_per_minute.integer)}"
                      r" \,\unit{\per\minute}$\\"
                      "\n"
                      r"Cadence & $"
-                     f"{to_string(run.cadence)}"
+                     f"{to_string(run.cadence.integer)}"
                      r" \,\unit{\per\minute}$\\"
                      "\n"
                      r"Energy & $"
@@ -136,15 +135,15 @@ def _get_table_3(run: Run) -> str:
         str: The third part of the table of the LaTeX document as a string.
     """
     string_3: str = (r"Temperature & $"
-                     f"{to_string(run.avg_temperature)}"
+                     f"{to_string(run.avg_temperature.integer)}"
                      r" \,\unit{\degreeCelsius}$\\"
                      "\n"
                      r"Sweat & $"
-                     f"{to_string(run.sweat)}"
+                     f"{to_string(run.sweat.integer)}"
                      r" \,\unit{\milli\liter}$\\"
                      "\n"
                      r"Power & $"
-                     f"{to_string(run.avg_power)}"
+                     f"{to_string(run.avg_power.integer)}"
                      r" \,\unit{\watt}$\\"
                      "\n"
                      r"Training Effect & "
@@ -152,11 +151,11 @@ def _get_table_3(run: Run) -> str:
                      r"\\"
                      "\n"
                      r"Aerob & $"
-                     f"{to_string(run.aerob)}"
+                     f"{to_string(run.aerob.floating)}"
                      r"$\\"
                      "\n"
                      r"Anaerob & $"
-                     f"{to_string(run.anaerob)}"
+                     f"{to_string(run.anaerob.floating)}"
                      r"$\\"
                      "\n")
     return string_3
@@ -236,19 +235,6 @@ def _get_text(run: Run) -> str:
     end: str = _get_end()
     text: str = preamble + begin + table + end
     return text
-
-
-def _new_folder(folder: str) -> None:
-    """
-    Create a new folder if it does not exist.
-
-    Args:
-        folder (str): The folder path.
-    """
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-    else:
-        input("Folder already exists. Backup any important files. Press enter to continue.")
 
 
 def _make_pdf(folder: str, file_location: str) -> None:

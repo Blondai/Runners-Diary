@@ -1,4 +1,4 @@
-from utils import string_to_int, is_between, str_is_int, str_correct_len
+from utils import string_to_int, is_between
 
 
 class Date:
@@ -50,27 +50,12 @@ class Date:
             Date: A Date object created from the given string.
         """
         split_string: list[str] = string.split('.')
-        Date.ensure_format(split_string)
         list_of_ints: list[int] = string_to_int(split_string)
         day: int = list_of_ints[0]
         month: int = list_of_ints[1]
         year: int = list_of_ints[2]
         date: Date = Date(day, month, year)
         return date
-
-    @staticmethod
-    def ensure_format(split_string: list[str]) -> None:
-        """
-        Ensure that each segment of the date string has the correct length and contains only digits.
-
-        Args:
-            split_string (list[str]): A list of strings representing the date segments.
-        """
-        lengths: list[int] = [2, 2, 4]
-        for index, string in enumerate(split_string):
-            str_correct_len(string, lengths[index])
-            for character in string:
-                str_is_int(character)
 
     def __str__(self, reversed: bool = False, short: bool = False) -> str:
         """

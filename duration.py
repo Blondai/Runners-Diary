@@ -1,4 +1,4 @@
-from utils import string_to_int, _round, is_between, str_correct_len, str_is_int
+from utils import string_to_int, _round, is_between
 
 
 class Duration:
@@ -51,7 +51,6 @@ class Duration:
             ValueError: If the string does not match the required format.
         """
         split_string: list[str] = string.split(':')
-        Duration.ensure_format(split_string)
         list_of_ints: list[int] = string_to_int(split_string)
         if len(list_of_ints) == 2:
             hours: int = 0
@@ -65,20 +64,6 @@ class Duration:
             raise ValueError("Incorrect format. Use 'hh:mm:ss' or 'mm:ss'.")
         duration: Duration = Duration(hours, minutes, seconds)
         return duration
-
-    @staticmethod
-    def ensure_format(split_string: list[str]) -> None:
-        """
-        Ensure that each part of the time string has the correct length and is a valid integer.
-
-        Args:
-            split_string (list[str]): List of string components from the time string.
-        """
-        lengths: list[int] = [2, 2, 2]
-        for index, string in enumerate(split_string):
-            str_correct_len(string, lengths[index])
-            for character in string:
-                str_is_int(character)
 
     @staticmethod
     def from_seconds(seconds: int) -> 'Duration':

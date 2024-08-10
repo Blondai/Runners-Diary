@@ -1,4 +1,4 @@
-from utils import _round, is_between, str_is_int
+from utils import _round, is_between
 
 
 class Energy:
@@ -9,7 +9,7 @@ class Energy:
         kcal (int): Energy in kilocalories.
     """
 
-    def __init__(self, kcal: int) -> None:
+    def __init__(self, kcal: int | None) -> None:
         """
         Initialize the Energy object with kilocalories.
 
@@ -22,7 +22,7 @@ class Energy:
         is_between(kcal,
                    lower_value=0,
                    int_only=True)
-        self.kcal: int = kcal
+        self.kcal: int | None = kcal
 
     @staticmethod
     def from_string(string: str) -> 'Energy':
@@ -35,21 +35,12 @@ class Energy:
         Returns:
             Energy: An Energy object created from the given string.
         """
-        Energy.ensure_format(string)
-        kcal: int = int(string)
+        if string == '' or string == '-':
+            kcal: None = None
+        else:
+            kcal: int = int(string)
         energy: Energy = Energy(kcal)
         return energy
-
-    @staticmethod
-    def ensure_format(string: str) -> None:
-        """
-        Ensure that the string represents a valid integer value.
-
-        Args:
-            string (str): The string to validate.
-        """
-        for character in string:
-            str_is_int(character)
 
     def __str__(self) -> str:
         """
@@ -58,8 +49,10 @@ class Energy:
         Returns:
             str: The string representation of the energy in kilocalories.
         """
-        string: str = f'{self.to_kilocalories()}'
-        return string
+        if not self.kcal is None:
+            string: str = f'{self.to_kilocalories()}'
+            return string
+        return '-'
 
     def to_kilocalories(self, num_of_digits: int | None = None) -> int:
         """
