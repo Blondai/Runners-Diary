@@ -185,7 +185,7 @@ def _input_date() -> Date:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Date: ")
+        string: str = input("Date [dd.mm.yyyy]: ")
         if _test_date(string):
             date: Date = Date.from_string(string)
             return date
@@ -203,7 +203,7 @@ def _input_distance() -> Distance:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Distance: ")
+        string: str = input("Distance [m]: ")
         if string == '':
             print("Distance is a necessary metric.")
             continue
@@ -224,7 +224,7 @@ def _input_duration() -> Duration:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Duration: ")
+        string: str = input("Duration [hh:mm:ss | mm:ss]: ")
         if string == '':
             print("Duration is a necessary metric.")
             continue
@@ -245,7 +245,7 @@ def _input_energy() -> Energy:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Energy: ")
+        string: str = input("Energy [kcal]: ")
         if _test_energy(string) or string == '':
             energy: Energy = Energy.from_string(string)
             return energy
@@ -263,7 +263,7 @@ def _input_ascent() -> Distance:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Ascent: ")
+        string: str = input("Ascent [m]: ")
         if _test_distance(string) or string == '':
             ascent: Distance = Distance.from_string(string)
             return ascent
@@ -281,7 +281,7 @@ def _input_descent() -> Distance:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Descent: ")
+        string: str = input("Descent [m]: ")
         if _test_distance(string) or string == '':
             descent: Distance = Distance.from_string(string)
             return descent
@@ -299,7 +299,7 @@ def _input_sweat() -> Integer:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Sweat: ")
+        string: str = input("Sweat [mL]: ")
         if _test_int(string) or string == '':
             sweat: Integer = Integer.from_string(string)
             return sweat
@@ -317,7 +317,7 @@ def _input_avg_heartbeats_per_minute() -> Integer:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Average Heartbeats per Minute: ")
+        string: str = input("Average Heartbeats per Minute [bpm]: ")
         if _test_int(string) or string == '':
             avg_heartbeats_per_minute: Integer = Integer.from_string(string)
             return avg_heartbeats_per_minute
@@ -335,7 +335,7 @@ def _input_avg_power() -> Integer:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Average Power: ")
+        string: str = input("Average Power [W]: ")
         if _test_int(string) or string == '':
             avg_power: Integer = Integer.from_string(string)
             return avg_power
@@ -353,7 +353,7 @@ def _input_cadence() -> Integer:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Cadence: ")
+        string: str = input("Cadence [steps / min]: ")
         if _test_int(string) or string == '':
             cadence: Integer = Integer.from_string(string)
             return cadence
@@ -371,7 +371,7 @@ def _input_avg_temperature() -> Integer:
         TimeoutError: If the maximum number of attempts is exceeded.
     """
     for _ in range(_get_max_tries()):
-        string: str = input("Average Temperature: ")
+        string: str = input("Average Temperature [°C]: ")
         if _test_int(string) or string == '':
             avg_temperature: Integer = Integer.from_string(string)
             return avg_temperature

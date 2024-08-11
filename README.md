@@ -10,3 +10,4 @@ They will also be exported to a json file, so you can later analyze multiple run
 - Add function for visualization
 - Add function to combine all pdf into one diary
 - Sort methods in classes
+- Clean up
