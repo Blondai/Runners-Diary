@@ -11,18 +11,18 @@ def input_run() -> Run:
     date: Date = _input_date()
     distance: Distance = _input_distance()
     duration: Duration = _input_duration()
+    training: str = _input_training()
+    avg_heartbeats_per_minute: Integer = _input_avg_heartbeats_per_minute()
     energy: Energy = _input_energy()
+    effect: str = _input_effect()
+    aerob: Floating = _input_aerob()
+    anaerob: Floating = _input_anaerob()
+    avg_power: Integer = _input_avg_power()
+    cadence: Integer = _input_cadence()
     ascent: Distance = _input_ascent()
     descent: Distance = _input_descent()
     sweat: Integer = _input_sweat()
-    avg_heartbeats_per_minute: Integer = _input_avg_heartbeats_per_minute()
-    avg_power: Integer = _input_avg_power()
-    cadence: Integer = _input_cadence()
     avg_temperature: Integer = _input_avg_temperature()
-    aerob: Floating = _input_aerob()
-    anaerob: Floating = _input_anaerob()
-    effect: str = _input_effect()
-    training: str = _input_training()
     location: str = _input_location()
     notes: str = _input_notes()
     run: Run = Run(date=date,
@@ -189,7 +189,7 @@ def _input_date() -> Date:
         if _test_date(string):
             date: Date = Date.from_string(string)
             return date
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_distance() -> Distance:
@@ -210,7 +210,7 @@ def _input_distance() -> Distance:
         if _test_distance(string):
             distance: Distance = Distance.from_string(string)
             return distance
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_duration() -> Duration:
@@ -231,7 +231,7 @@ def _input_duration() -> Duration:
         if _test_duration(string):
             duration: Duration = Duration.from_string(string)
             return duration
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_energy() -> Energy:
@@ -249,7 +249,7 @@ def _input_energy() -> Energy:
         if _test_energy(string) or string == '':
             energy: Energy = Energy.from_string(string)
             return energy
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_ascent() -> Distance:
@@ -267,7 +267,7 @@ def _input_ascent() -> Distance:
         if _test_distance(string) or string == '':
             ascent: Distance = Distance.from_string(string)
             return ascent
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_descent() -> Distance:
@@ -285,7 +285,7 @@ def _input_descent() -> Distance:
         if _test_distance(string) or string == '':
             descent: Distance = Distance.from_string(string)
             return descent
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_sweat() -> Integer:
@@ -303,7 +303,7 @@ def _input_sweat() -> Integer:
         if _test_int(string) or string == '':
             sweat: Integer = Integer.from_string(string)
             return sweat
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_avg_heartbeats_per_minute() -> Integer:
@@ -321,7 +321,7 @@ def _input_avg_heartbeats_per_minute() -> Integer:
         if _test_int(string) or string == '':
             avg_heartbeats_per_minute: Integer = Integer.from_string(string)
             return avg_heartbeats_per_minute
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_avg_power() -> Integer:
@@ -339,7 +339,7 @@ def _input_avg_power() -> Integer:
         if _test_int(string) or string == '':
             avg_power: Integer = Integer.from_string(string)
             return avg_power
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_cadence() -> Integer:
@@ -357,7 +357,7 @@ def _input_cadence() -> Integer:
         if _test_int(string) or string == '':
             cadence: Integer = Integer.from_string(string)
             return cadence
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_avg_temperature() -> Integer:
@@ -375,7 +375,7 @@ def _input_avg_temperature() -> Integer:
         if _test_int(string) or string == '':
             avg_temperature: Integer = Integer.from_string(string)
             return avg_temperature
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_aerob() -> Floating:
@@ -393,7 +393,7 @@ def _input_aerob() -> Floating:
         if _test_float(string) or string == '':
             aerob: Floating = Floating.from_string(string)
             return aerob
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_anaerob() -> Floating:
@@ -411,7 +411,7 @@ def _input_anaerob() -> Floating:
         if _test_float(string) or string == '':
             anaerob: Floating = Floating.from_string(string)
             return anaerob
-    raise TimeoutError("To many tries.")
+    raise TimeoutError("Too many tries.")
 
 
 def _input_effect() -> str:
